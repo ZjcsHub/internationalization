@@ -26,7 +26,7 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(Array(repeating: 0, count: 24))
         let string1 = "1.将String文件转成xml文件格式输出"
         let string2 = "2.比对文件的不同之处，比对出文件1比文件2多出部分,完全不同"
         let string3 = "3.排序,给入一个基类的文件，比对的plist文件，可以将key值排序出来"
@@ -36,6 +36,9 @@ class ViewController: NSViewController {
         theTextView.isEditable = false
         theTextView.string = "\(string1)\n\(string2)\n\(string3)\n\(string4)"
         textSctollView.addSubview(theTextView)
+        
+//        addChild(InsertViewController())
+        
         
     }
 
@@ -60,6 +63,12 @@ class ViewController: NSViewController {
         case 3:
             completeTextField.isHidden = false
             sortFileTextField.isHidden = false
+        case 4:
+            // 跳转下一个视图
+
+            let greenVC = InsertViewController()
+//            present(greenVC, animator: PresentAnimator())
+            presentAsSheet(greenVC)
         default:
             sortFileTextField.isHidden = false
             completeTextField.isHidden = false

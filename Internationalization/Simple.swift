@@ -333,6 +333,66 @@ extension Simple {
     }
    
     
+    
+    
+    func addTextToFile(pathFile:String,needWriteString:String,namePrefix:String = "All") {
+        
+        
+        // 1.判断是否存在文件夹
+        
+        let isExit = fieldManager.fileExists(atPath: pathFile, isDirectory: nil)
+        
+        if isExit {
+            
+            // 2. 判断文件夹子目录
+            dealWithPathexitLocalizable(pathFile: pathFile, namePrefix: namePrefix, needWriteString: needWriteString)
+                
+           
+            
+        }else{
+            showAlertError(string: "不存在文件夹", needContinue: nil)
+        }
+    }
+    
+    func dealWithPathexitLocalizable(pathFile:String,namePrefix:String,needWriteString:String) {
+        do {
+            // 获取到所有子目录文件
+            let allFloder = try fieldManager.contentsOfDirectory(atPath: pathFile)
+            for item in allFloder {
+                if (namePrefix == "All" ? true : item.hasPrefix(namePrefix)) && item.hasSuffix("lproj") &&  fieldManager.fileExists(atPath: pathFile, isDirectory: nil){
+                    // 是国际化的目录
+                    let localizablePath = pathFile + "/\(item)/Localizable.strings"
+                    if fieldManager.fileExists(atPath: localizablePath ) {
+                        //存在国际化文件，将字符加进去
+                        guard let fileHandle = FileHandle(forWritingAtPath: localizablePath) , let fileData = ("\n" + needWriteString).data(using: .utf8)  else {
+                            showAlertError(string: "创建句柄失败或转换字符串失败", needContinue: nil)
+                            continue
+                        }
+                        
+                        // 移动句柄到末尾
+                        do {
+                            fileHandle.seekToEndOfFile()
+                            fileHandle.write(fileData)
+                        }
+                          
+                        
+                        
+                    }
+                    
+                        
+                        
+                  
+                  
+                    
+                }
+            }
+            showAlertError(string: "写完成", needContinue: nil)
+            
+        } catch let error {
+            showAlertError(string: error.localizedDescription, needContinue: nil)
+        }
+    }
+    
 }
 
 extension Simple :XmlChangeJsonDelegate{
