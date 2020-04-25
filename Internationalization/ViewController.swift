@@ -20,7 +20,7 @@ class ViewController: NSViewController {
     @IBAction func compariseDifference(_ sender: Any) {
         let differentVc = ComparisonViewController()
         presentAsSheet(differentVc)
-    }
+     }
     
     
     @IBAction func addTitleToFile(_ sender: Any) {
