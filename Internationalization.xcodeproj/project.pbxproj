@@ -17,6 +17,9 @@
 		4A6996EF2452F32200CC7599 /* InsertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6996ED2452F32100CC7599 /* InsertViewController.xib */; };
 		4A6996F12452F51D00CC7599 /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6996F02452F51D00CC7599 /* PresentAnimator.swift */; };
 		4A6996F32452F54000CC7599 /* CBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6996F22452F54000CC7599 /* CBackgroundView.swift */; };
+		4A6996F62453DBFD00CC7599 /* ComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6996F42453DBFD00CC7599 /* ComparisonViewController.swift */; };
+		4A6996F72453DBFD00CC7599 /* ComparisonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6996F52453DBFD00CC7599 /* ComparisonViewController.xib */; };
+		4A6996F92453E83F00CC7599 /* Location.py in Resources */ = {isa = PBXBuildFile; fileRef = 4A6996F82453E83F00CC7599 /* Location.py */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		4A6996ED2452F32100CC7599 /* InsertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsertViewController.xib; sourceTree = "<group>"; };
 		4A6996F02452F51D00CC7599 /* PresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
 		4A6996F22452F54000CC7599 /* CBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBackgroundView.swift; sourceTree = "<group>"; };
+		4A6996F42453DBFD00CC7599 /* ComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonViewController.swift; sourceTree = "<group>"; };
+		4A6996F52453DBFD00CC7599 /* ComparisonViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComparisonViewController.xib; sourceTree = "<group>"; };
+		4A6996F82453E83F00CC7599 /* Location.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Location.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,8 @@
 			children = (
 				4A22D232229E5C8C00F75D5D /* AppDelegate.swift */,
 				4A22D234229E5C8C00F75D5D /* ViewController.swift */,
+				4A6996F42453DBFD00CC7599 /* ComparisonViewController.swift */,
+				4A6996F52453DBFD00CC7599 /* ComparisonViewController.xib */,
 				4A6996EC2452F32100CC7599 /* InsertViewController.swift */,
 				4A6996ED2452F32100CC7599 /* InsertViewController.xib */,
 				4A323CBB22A26E0500B63410 /* Simple.swift */,
@@ -75,6 +83,7 @@
 				4A6996F22452F54000CC7599 /* CBackgroundView.swift */,
 				4A22D236229E5C8F00F75D5D /* Assets.xcassets */,
 				4A22D238229E5C8F00F75D5D /* Main.storyboard */,
+				4A6996F82453E83F00CC7599 /* Location.py */,
 				4A22D23B229E5C8F00F75D5D /* Info.plist */,
 				4A22D23C229E5C8F00F75D5D /* Internationalization.entitlements */,
 			);
@@ -142,6 +151,8 @@
 				4A6996EF2452F32200CC7599 /* InsertViewController.xib in Resources */,
 				4A22D237229E5C8F00F75D5D /* Assets.xcassets in Resources */,
 				4A22D23A229E5C8F00F75D5D /* Main.storyboard in Resources */,
+				4A6996F92453E83F00CC7599 /* Location.py in Resources */,
+				4A6996F72453DBFD00CC7599 /* ComparisonViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +166,7 @@
 				4A22D235229E5C8C00F75D5D /* ViewController.swift in Sources */,
 				4A22D233229E5C8C00F75D5D /* AppDelegate.swift in Sources */,
 				4A6996EE2452F32200CC7599 /* InsertViewController.swift in Sources */,
+				4A6996F62453DBFD00CC7599 /* ComparisonViewController.swift in Sources */,
 				4A323CBC22A26E0500B63410 /* Simple.swift in Sources */,
 				4A6996F12452F51D00CC7599 /* PresentAnimator.swift in Sources */,
 				4A323CC022A2867000B63410 /* XmlChangeJson.swift in Sources */,

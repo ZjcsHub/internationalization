@@ -162,7 +162,7 @@ class Simple: NSObject {
 
 extension Simple {
     // MARK: - 比对
-    func comparisonAndSort(baseField:String,completeField:String,SortArray:Array<String>,needaffirm:Bool,returnString:((String)->())?) {
+    func comparisonAndSort(baseField:String,completeField:String,needaffirm:Bool,returnString:((String)->())?) {
         
         if needaffirm {
            let outPutString = self.comparisonDifferentOSD(baseField: baseField, completeField: completeField)
@@ -191,135 +191,32 @@ extension Simple {
                     }
                     dictionary[basekey as! String] = outValue as? String
                 }
-                var string = "";
+                var stringList:[String] = []
                 
-                for name in SortArray {
-                    for (key,value) in dictionary {
-                        let afChangeStrong = self.changeString(changevalue: value)
-                        
-                        if key == name {
-                            string += "\"\(key)\" = \"\(afChangeStrong)\";\n"
-                            dictionary.removeValue(forKey: key)
-                        }
-                    }
-                    
-                }
+//                for name in SortArray {
+//                    for (key,value) in dictionary {
+//                        let afChangeStrong = value
+//                        
+//                        if key == name {
+//                            stringList.append("\"\(key)\" = \"\(afChangeStrong)\";")
+//                            dictionary.removeValue(forKey: key)
+//                        }
+//                    }
+//                    
+//                }
                 for (key,value) in dictionary {
-                    var afChangeStrong = (value as NSString)
-                    afChangeStrong = afChangeStrong.replacingOccurrences(of: "\n", with: "\\n") as (NSString)
-                    afChangeStrong = afChangeStrong.replacingOccurrences(of: "\"", with: "\\\"") as (NSString)
-                    
-                    string += "\"\(key)\" = \"\(afChangeStrong)\";\n"
-                    
+                    let afChangeStrong = (value as NSString)
+                    stringList.append("\"\(key)\" = \"\(afChangeStrong)\";")
                 }
                 
                
-                if !string.isEmpty {
+                if !stringList.isEmpty {
                     do{
                         let fileName = desktopField + "\(getDateText()).xml"
-                        try string.write(toFile:fileName , atomically: true, encoding: .utf8)
-                        showAlertError(string:fileName , needContinue: nil)
-                    }
-                    catch {
-                        showAlertError(string:"写入文件出错" , needContinue: nil)
-                    }
-                }
-                
-            }
-        }
-    }
-    
-    // MARK: - 比对文本xml格式
-    func comparisonAndSortWithXml(baseField:String,completeField:String,SortArray:Array<String>,needaffirm:Bool,returnString:((String)->())?) {
-        self.xmlActionBlock = { (dictionary) in
-            
-            self.trabslateStringByDictionary(baseField: baseField, dictionary: dictionary, SortArray: SortArray, needaffirm: needaffirm, returnString: returnString)
-        }
-        xmlManager.delegate = self
-        xmlManager.transLate(xmlField: completeField)
-        
-       
-    }
-    
-    
-    func trabslateStringByDictionary(baseField:String,dictionary:Dictionary<String, String>,SortArray:Array<String>,needaffirm:Bool,returnString:((String)->())?) {
-        
-        if needaffirm {
-            
-            let fieldPath =  baseField
-            let flag = fieldManager.fileExists(atPath: fieldPath)
-            var string = "";
-            
-            if flag {
-                if let baseDict = NSDictionary(contentsOfFile: fieldPath){
-                    
-                    for (basekey,basevalue) in baseDict {
-                        for (changekey,changevalue) in dictionary {
-                            if (basekey as! String).elementsEqual(changekey ) && !(changevalue ).elementsEqual(basevalue as! String){
-                                let afChangeStrong = changeString(changevalue: changevalue )
-                                string += "\"\(basekey)\" = \"\(afChangeStrong)\";\n"
-                            }
-                        }
-                    }
-                    
-                }
-            }else{
-                showAlertError(string: "没有此文件", needContinue: nil)
-            }
-            
-            if (returnString != nil) {
-                returnString!(string)
-            }
-            
-            return
-        }
-        
-        
-        
-        
-        
-        let fieldPath =  baseField
-        let flag = fieldManager.fileExists(atPath: fieldPath)
-        let changeDic = dictionary
-        if flag {
-            if let baseDict = NSDictionary(contentsOfFile: fieldPath){
-                var dictionary = Dictionary<String,String>()
-                for (basekey,basevalue) in baseDict {
-                    var outValue = basevalue
-                    for (changekey,changevalue) in changeDic {
-                        if (basekey as! String).elementsEqual(changekey ) {
-                            outValue = changevalue
-                            break
-                        }
-                    }
-                    dictionary[basekey as! String] = outValue as? String
-                }
-                var string = "";
-                
-                for name in SortArray {
-                    for (key,value) in dictionary {
-                        let afChangeStrong = self.changeString(changevalue: value)
+                        // 排序
+                        stringList.sort()
+                        let string = stringList.joined(separator: "\n")
                         
-                        if key == name {
-                            string += "\"\(key)\" = \"\(afChangeStrong)\";\n"
-                            dictionary.removeValue(forKey: key)
-                        }
-                    }
-                    
-                }
-                for (key,value) in dictionary {
-                    var afChangeStrong = (value as NSString)
-                    afChangeStrong = afChangeStrong.replacingOccurrences(of: "\n", with: "\\n") as (NSString)
-                    afChangeStrong = afChangeStrong.replacingOccurrences(of: "\"", with: "\\\"") as (NSString)
-                    
-                    string += "\"\(key)\" = \"\(afChangeStrong)\";\n"
-                    
-                }
-                
-                
-                if !string.isEmpty {
-                    do{
-                        let fileName = desktopField + "\(getDateText()).xml"
                         try string.write(toFile:fileName , atomically: true, encoding: .utf8)
                         showAlertError(string:fileName , needContinue: nil)
                     }
@@ -331,6 +228,7 @@ extension Simple {
             }
         }
     }
+    
    
     
     
@@ -374,16 +272,7 @@ extension Simple {
                             fileHandle.seekToEndOfFile()
                             fileHandle.write(fileData)
                         }
-                          
-                        
-                        
                     }
-                    
-                        
-                        
-                  
-                  
-                    
                 }
             }
             showAlertError(string: "写完成", needContinue: nil)
